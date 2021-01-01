@@ -1,0 +1,39 @@
+;;; POLYBAR CONFIG
+
+
+;; Global WM Settings
+
+[global/wm]
+; Includes
+include-file = ~/.config/polybar/colors.ini
+include-file = ~/.config/polybar/modules.ini
+
+;; Bar Definition
+
+[bar/main]
+
+; colors
+background = ${color.background}
+foreground = ${color.foreground}
+tray-background = ${color.background}
+underline-color = ${color.foreground}
+border-color = ${color.background}
+
+; fonts
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+
+; general settings
+width = 100%
+height = 32
+padding = 2
+underline-size = 2
+border-size = 0
+fixed-center = true
+seperator = " "
+
+; modules
+modules-left = title
+modules-center = bspwm
+modules-right = pulseaudio date-time
