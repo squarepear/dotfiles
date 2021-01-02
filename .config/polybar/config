@@ -27,9 +27,8 @@ height = 32
 underline-size = 2
 border-size = 0
 fixed-center = true
-seperator = " "
 
 ; modules
-modules-left = padding launcher left-A title left-B-end
-modules-center = bspwm
-modules-right = right-A-end pulseaudio right-B date-time right-A power padding
+modules-left = launcher left-A title left-B-end
+modules-center = memory padding bspwm padding cpu
+modules-right = right-A-end pulseaudio right-B date-time right-A power
