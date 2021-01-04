@@ -18,8 +18,9 @@ underline-color = ${color.foreground}
 border-color = ${color.background}
 
 ; fonts
-font-0 = "Iosevka Nerd Font:pixelsize=10;3"
-font-1 = "Iosevka Nerd Font:style=Medium:size=22;5"
+font-0 = "SpaceMono Nerd Font Mono:pixelsize=10;3"
+font-1 = "SpaceMono Nerd Font Mono:style=Medium:size=22;5"
+font-2 = "Iosevka Nerd Font:pixelsize=10;3"
 
 ; general settings
 width = 100%

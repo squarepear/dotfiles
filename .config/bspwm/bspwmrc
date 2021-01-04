@@ -1,18 +1,37 @@
 #! /bin/sh
+# Code stolen from https://github.com/safinsingh/dots/blob/master/home/.config/bspwm/bspwmrc
 
-pgrep -x sxhkd > /dev/null || sxhkd &
-~/.config/polybar/launch.sh --shapes &
-bspc monitor -d I II III IV V VI VII VIII IX X
+_c() { bspc config "$@"; }
+_m() { bspc monitor "$@"; }
+_s() {
+    pkill -x "$1"
+    {
+        sleep 0.1
+        "$@" &
+    }
+}
 
-bspc config border_width         2
-bspc config window_gap           6
+# monitors
+_m -d I II III IV V VI VII VIII IX X
 
-bspc config split_ratio          0.52
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
+# config
+_c border_width 0
+_c window_gap 6
+_c borderless_monocle true
+_c gapless_monocle true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+# pywal colors
+. "${HOME}/.cache/wal/colors.sh"
+
+_c normal_border_color "$color1"
+_c active_border_color "$color2"
+_c focused_border_color "$color15"
+_c presel_feedback_color "$color1"
+
+# startup
+pulseaudio --start
+_s sxhkd
+_s picom -b
+_s openrazer-daemon -r
+_s razer-cli -a
+_s polybar main
