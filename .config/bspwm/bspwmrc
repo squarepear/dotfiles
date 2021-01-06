@@ -29,7 +29,6 @@ _c focused_border_color "$color15"
 _c presel_feedback_color "$color1"
 
 # startup
-pulseaudio --start
 _s sxhkd
 _s picom -b
 _s openrazer-daemon -r
