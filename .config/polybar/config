@@ -9,6 +9,7 @@ include-file = ~/.config/polybar/modules.ini
 ;; Bar Definition
 
 [bar/main]
+monitor = eDP
 
 ; colors
 background = ${color.background}
@@ -18,13 +19,13 @@ underline-color = ${color.foreground}
 border-color = ${color.background}
 
 ; fonts
-font-0 = "SpaceMono Nerd Font Mono:pixelsize=10;3"
-font-1 = "SpaceMono Nerd Font Mono:style=Medium:size=22;5"
-font-2 = "Iosevka Nerd Font:pixelsize=10;3"
+font-0 = "SpaceMono Nerd Font Mono:pixelsize=14;3"
+font-1 = "SpaceMono Nerd Font Mono:style=Medium:size=28;5"
+font-2 = "Iosevka Nerd Font:pixelsize=14;3"
 
 ; general settings
 width = 100%
-height = 32
+height = 40
 underline-size = 2
 border-size = 0
 fixed-center = true
@@ -33,3 +34,31 @@ fixed-center = true
 modules-left = launcher left-A title left-B-end
 modules-center = memory padding bspwm padding cpu
 modules-right = right-A-end pulseaudio right-B date-time right-A power
+
+[bar/external]
+monitor = DisplayPort-2
+
+; colors
+background = ${color.background}
+foreground = ${color.foreground}
+tray-background = ${color.background}
+underline-color = ${color.foreground}
+border-color = ${color.background}
+
+; fonts
+font-0 = "SpaceMono Nerd Font Mono:pixelsize=14;3"
+font-1 = "SpaceMono Nerd Font Mono:style=Medium:size=28;5"
+font-2 = "Iosevka Nerd Font:pixelsize=14;3"
+
+; general settings
+width = 100%
+height = 40
+underline-size = 2
+border-size = 0
+fixed-center = true
+
+; modules
+modules-left = launcher left-A title left-B-end
+modules-center = memory padding bspwm padding cpu
+modules-right = right-A-end pulseaudio right-B date-time right-A power
+

@@ -4,19 +4,26 @@
 _c() { bspc config "$@"; }
 _m() { bspc monitor "$@"; }
 _s() {
-    pkill -x "$1"
-    {
-        sleep 0.1
-        "$@" &
-    }
+  pkill -x "$1"
+  {
+    sleep 0.1
+    "$@" &
+  }
 }
 
 # monitors
-_m -d I II III IV V VI VII VIII IX X
+my_laptop_external_monitor=$(xrandr --query | grep 'DisplayPort-2')
+if [[ $my_laptop_external_monitor = *connected* ]]; then
+  $HOME/.screenlayout/dual-mbp+1440psamsung.sh
+  _m eDP -d I II III IV V
+  _m DisplayPort-2 -d VI VII VIII IX X
+else
+  _m I II III IV V VI VII VIII IX X 
+fi
 
 # config
 _c border_width 0
-_c window_gap 6
+_c window_gap 8
 _c borderless_monocle true
 _c gapless_monocle true
 
@@ -31,6 +38,12 @@ _c presel_feedback_color "$color1"
 # startup
 _s sxhkd
 _s picom -b
-_s openrazer-daemon -r
-_s razer-cli -a
-_s polybar main
+#_s openrazer-daemon -r
+#_s razer-cli -a
+_s polybar main 
+
+if [[ $my_laptop_external_monitor = *connected* ]]; then
+  polybar external
+fi
+echo "bspwm ready!"
+

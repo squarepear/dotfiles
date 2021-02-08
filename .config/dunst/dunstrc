@@ -29,7 +29,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "0x0-8+40"
+    geometry = "0x0-8+48"
 	
     # Turn on the progess bar
     progress_bar = true
@@ -103,7 +103,7 @@
 
     ### Text ###
 
-    font = SpaceMono Nerd Font Mono 8
+    font = SpaceMono Nerd Font Mono 12
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.

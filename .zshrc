@@ -1,16 +1,24 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# start gui on tty1
+if [[ "$(tty)" == "/dev/tty1" ]]; then
+    startx	
 fi
 
-# (disabled for now because old and bad computer)
-# neofetch
+# startup
+clear && pfetch
 
 # general config
-export EDITOR=nano
+export TERMINAL=kitty
+export EDITOR=nvim
+export BROWSER=firefox
 export FILEBROWSER=thunar
+
+export PROMPT='%F{red}%B>%b%f '
+
+# history
+export HISTFILE="$HOME/.zsh_history"
+export SAVEHIST=100
+setopt inc_append_history
+setopt hist_ignore_all_dups
 
 # path
 export PATH="$HOME/.bin:$PATH"
@@ -18,8 +26,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 
 # aliases
-alias config='/usr/bin/git --git-dir=/home/jeffrey/dotfiles --work-tree=/home/jeffrey'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME/'
+alias cat=bat
+alias vim=nvim
 
-# theme
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
