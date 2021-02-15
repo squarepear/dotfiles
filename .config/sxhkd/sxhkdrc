@@ -4,6 +4,7 @@
 
 # terminal emulator
 super + Return
+	notify-send "Opening terminal" && \
 	kitty
 
 # program launcher
@@ -12,24 +13,29 @@ super + space
 
 # make sxhkd reload its configuration files
 super + Escape
-	pkill -USR1 -x sxhkd
+	pkill -USR1 -x sxhkd && \
+	notify-send "sxhkd reloaded!"
 
 # Screenshot
-super + Print
-	scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png && \
+super + {_,shift + }p 
+	scrot -{z,u} '%Y-%m-%d-%T-screenshot.png' -e 'mv $f ~/shots/' && \
 	notify-send "Screenshot taken!"
 
 # Applications
 super + shift + f
+	notify-send "Opening file browser" && \
 	thunar
 
 super + shift + w
+	notify-send "Opening web browser" && \
 	firefox
 
 super + shift + s
+	notify-send "Opening steam" && \
 	GDK_SCALE=2 steam
 
 super + shift + m
+	notify-send "Opening multimc" && \
 	multimc
 
 #

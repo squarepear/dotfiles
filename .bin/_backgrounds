@@ -44,7 +44,7 @@ change_color() {
 # Main
 if [[ -f "/usr/bin/wal" ]]; then
 	if [[ "$1" ]]; then
-		nitrogen --set-zoom-fill "$1"
+		feh --bg-fill "$1"
 		pywal_get "$1"
 
 		# Source the pywal color file

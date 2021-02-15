@@ -18,7 +18,7 @@ if [[ $my_laptop_external_monitor = *connected* ]]; then
   _m eDP -d I II III IV V
   _m DisplayPort-2 -d VI VII VIII IX X
 else
-  _m I II III IV V VI VII VIII IX X 
+  _m -d I II III IV V VI VII VIII IX X 
 fi
 
 # config
