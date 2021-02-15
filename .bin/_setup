@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+
+command_installed() {
+  ! command -v "$1" &> /dev/null && return 0
+
+  return 1
+}
+
+if [ "$user" = "root" ]; then
+  echo "This script should not be run as root! Please login to a different user."
+  return
+fi
+
+clear
+
+echo -e "This setup assumes you have fully setup your arch/artix install up to the end of the guide. \n"
+
+echo -n "Are you ready to start? (y/N): "
+read -n 1 answer
+
+if [ "$answer" == "y" ]; then
+  echo
+  echo "Okay! Let's begin."
+
+  echo
+  echo "Changing to home directory."
+  cd
+
+  if command_installed git; then
+    echo "Git not found. Installing."    
+   
+    pacman -S git
+    
+    echo "Git successfully installed!"
+  else
+    echo "Git already installed. Skipping."
+  fi
+
+  echo
+  if command_installed paru; then
+    echo "Paru not found. Installing."
+
+    git clone https://aur.archlinux.org/paru.git && \
+    cd paru && \
+    makepkg -si && \
+    cd && rm -rf paru
+
+    echo "Paru successfully installed!"
+  else
+    echo "Paru already installed. Skipping."
+  fi
+
+  echo
+  echo "Installing any updates"
+  paru
+
+  echo
+  echo "Installing required packages."
+  paru -S zsh dkms xorg-server xorg-xinit bspwm sxhkd picom polybar rofi dunst kitty firefox thunar pywal-git neovim pfetch bat feh
+
+  echo
+  echo "Which video drivers do you need?"
+  echo "  1) amd"
+  echo "  2) nvidia"
+  echo "  3) intel"
+  echo
+  echo -n "Choice (default is 1): "
+
+  read -n 1 videodrivers
+
+  case "$videodrivers" in
+    "2")
+      paru -S nvidia-dkms nvidia-utils nvidia-settings
+      ;;
+    "3")
+      paru -S xf86-video-intel mesa
+      ;;
+    "1" | *)
+      paru -S xf86-video-amdgpu mesa
+  esac
+
+  echo
+  if [ ! -d $HOME/.dotfiles ]; then
+    echo "Getting dotfiles from SquarePear/dotfiles."
+    git clone --bare https://github.com/SquarePear/dotfiles.git .dotfiles
+    git --git-dir=$HOME/.dotfiles --work-tree=$HOME/ checkout
+  else
+    echo "Dotfiles found. Skipping download."
+  fi
+
+  echo
+  echo "Running final setup."
+  paru -S cynicalteam-wallpapers
+  $HOME/.bin/_monitors
+  $HOME/.bin/_backgrounds /usr/share/backgrounds/cynicalteam/0277.jpg
+  
+  echo
+  echo "Running cleanup."
+  paru -c
+
+  echo
+  echo "Setup complete!"
+  
+  echo
+  echo "Run the following command to restart and apply changes!"
+  echo "sudo reboot now"
+fi
+
+echo
+

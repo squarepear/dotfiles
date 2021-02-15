@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Files
+BFILE="$HOME/.config/bspwm/bspwmrc"
+PFILE="$HOME/.config/polybar/monitors.ini"
+
+
+RESULT=($(xrandr --query | grep -w connected | awk '{print $1}'))
+
+# echo ${RESULT[0]}
+# echo "then"
+# echo ${RESULT[1]}
+
+
+
