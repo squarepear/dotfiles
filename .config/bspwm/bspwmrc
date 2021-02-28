@@ -12,14 +12,13 @@ _s() {
 }
 
 # monitors
-my_laptop_external_monitor=$(xrandr --query | grep 'DisplayPort-2')
-if [[ $my_laptop_external_monitor = *connected* ]]; then
-  $HOME/.screenlayout/dual-mbp+1440psamsung.sh
-  _m eDP -d I II III IV V
-  _m DisplayPort-2 -d VI VII VIII IX X
-else
-  _m -d I II III IV V VI VII VIII IX X 
-fi
+monitors=($(xrandr --query | grep -w connected | awk '{print $1}'))
+
+#_m ${monitors}
+
+_m eDP -d I II III IV V
+_m DisplayPort-2 -d VI VII VIII IX X
+#_m -d I II III IV V VI VII VIII IX X 
 
 # config
 _c border_width 0
@@ -40,10 +39,10 @@ _s sxhkd
 _s picom -b
 #_s openrazer-daemon -r
 #_s razer-cli -a
-_s polybar main 
 
-if [[ $my_laptop_external_monitor = *connected* ]]; then
-  polybar external
-fi
+for m in ${monitors[@]}; do
+    MONITOR=$m polybar --reload main &
+done
+
 echo "bspwm ready!"
 
