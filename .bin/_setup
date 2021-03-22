@@ -56,7 +56,7 @@ if [ "$answer" == "y" ]; then
 
   echo
   echo "Installing required packages."
-  paru -S zsh dkms xorg-server xorg-xinit bspwm sxhkd picom polybar rofi dunst kitty firefox thunar pywal-git pulseaudio neovim pfetch bat feh nerd-fonts-iosevka nerd-fonts-space-mono
+  paru -S zsh dkms xorg-server xorg-xinit bspwm sxhkd picom polybar rofi dunst kitty firefox thunar pywal-git pulseaudio neovim pfetch bat feh zsh-pure-prompt-git nerd-fonts-iosevka nerd-fonts-space-mono
 
   echo
   echo "Which video drivers do you need?"

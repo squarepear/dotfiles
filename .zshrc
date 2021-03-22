@@ -12,8 +12,6 @@ export EDITOR=nvim
 export BROWSER=firefox
 export FILEBROWSER=thunar
 
-export PROMPT='%F{red}%B>%b%f '
-
 # history
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=100
@@ -30,3 +28,6 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME/'
 alias cat=bat
 alias vim=nvim
 
+# pure prompt
+autoload -U promptinit; promptinit
+prompt pure
